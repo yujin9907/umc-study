@@ -1,7 +1,10 @@
-package org.umc.workbook.domain;
+package org.umc.workbook.domain.mapping;
 
 import jakarta.persistence.*;
 import lombok.*;
+import org.umc.workbook.domain.FoodCategory;
+import org.umc.workbook.domain.Member;
+import org.umc.workbook.domain.common.BaseEntity;
 
 @Entity
 @Getter
@@ -9,9 +12,9 @@ import lombok.*;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
 @Table(name = "member_prefer")
-public class MemberPrefer {
+public class MemberPrefer extends BaseEntity {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY)

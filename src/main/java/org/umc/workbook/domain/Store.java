@@ -2,6 +2,7 @@ package org.umc.workbook.domain;
 
 import jakarta.persistence.*;
 import lombok.*;
+import org.umc.workbook.domain.common.BaseEntity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,14 +13,24 @@ import java.util.List;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
 @Table(name = "store")
-public class Store {
+public class Store extends BaseEntity {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @Column(nullable = false, length = 30)
     private String name;
+
+    @Column(nullable = false, length = 50)
     private String address;
+
+    @Column(nullable = false)
     private int startTime;
+
+    @Column(nullable = false)
     private int endTime;
+
+    @Column(nullable = true)
     private Float score; // TODO 쓸지말지
 
     @ManyToOne(fetch = FetchType.LAZY)

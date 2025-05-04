@@ -2,6 +2,13 @@ package org.umc.workbook.domain;
 
 import jakarta.persistence.*;
 import lombok.*;
+import org.umc.workbook.domain.common.BaseEntity;
+import org.umc.workbook.domain.enums.Gender;
+import org.umc.workbook.domain.enums.MemberStatus;
+import org.umc.workbook.domain.enums.SocialType;
+import org.umc.workbook.domain.mapping.MemberAgree;
+import org.umc.workbook.domain.mapping.MemberMission;
+import org.umc.workbook.domain.mapping.MemberPrefer;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -14,19 +21,39 @@ import java.util.List;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
 @Table(name = "member")
-public class Member {
+public class Member extends BaseEntity {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @Column(nullable = false, length = 20)
     private String name;
-    private String gender;
+
+    @Enumerated(EnumType.STRING)
+    private Gender gender;
+
+    @Column(nullable = false)
     private LocalDate birthDate;
+
+    @Column(nullable = false, length = 50)
     private String address;
+
+    @Column(nullable = false, length = 50)
     private String specAddress;
-    private String status;
+
+    @Enumerated(EnumType.STRING)
+    private MemberStatus status;
+
+    @Column(nullable = false)
     private LocalDateTime inactiveDate;
-    private String socialType;
+
+    @Enumerated(EnumType.STRING)
+    private SocialType socialType;
+
+    @Column(nullable = true, length = 50)
     private String email;
+
+    @Column(nullable = false)
     private Integer point;
 
     @OneToMany(mappedBy = "member", cascade = CascadeType.ALL, orphanRemoval = true)
